@@ -3,27 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1 Lights Game</title>
+    <title>Messenger</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <h1>F1 Lights Game</h1>
+        <h1>Messenger</h1>
     </header>
     <main>
-        <div class="lights-container">
-            <div class="light" id="light1"></div>
-            <div class="light" id="light2"></div>
-            <div class="light" id="light3"></div>
-            <div class="light" id="light4"></div>
-            <div class="light" id="light5"></div>
+        <div class="chat-container">
+            <div id="messages" class="messages"></div>
+            <div class="input-container">
+                <input type="file" id="fileInput">
+                <input type="text" id="messageInput" placeholder="Type a message...">
+                <button id="sendButton">Send</button>
+            </div>
         </div>
-        <button id="steeringWheel" class="steering-wheel"></button>
-        <div id="message"></div>
     </main>
-    <footer>
-        <p>&copy; 2024 F1 Lights Game</p>
-    </footer>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.2/firebase-storage.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
