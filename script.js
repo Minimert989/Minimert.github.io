@@ -1,42 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const lights = Array.from(document.querySelectorAll('.light'));
-    const button = document.getElementById('steeringWheel');
-    const message = document.getElementById('message');
+    const ipAddressElement = document.getElementById('ipAddress');
 
-    let lightsOffTime;
-    let gameStarted = false;
-
-    function randomTime(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
+    // Function to fetch the IP address from an API
+    function fetchIP() {
+        fetch('https://api.ipify.org?format=json')
+            .then(response => response.json())
+            .then(data => {
+                ipAddressElement.textContent = data.ip;
+            })
+            .catch(error => {
+                ipAddressElement.textContent = 'Unable to fetch IP address.';
+                console.error('Error fetching IP address:', error);
+            });
     }
 
-    function turnOffLights() {
-        const delay = randomTime(1000, 5000);
-        lightsOffTime = Date.now() + delay;
-        gameStarted = true;
-        lights.forEach((light, index) => {
-            setTimeout(() => {
-                light.style.backgroundColor = '#000'; // Light goes off
-            }, randomTime(0, delay));
-        });
-    }
-
-    button.addEventListener('click', function() {
-        if (!gameStarted) {
-            message.textContent = 'Please wait for the lights to turn off!';
-            return;
-        }
-
-        const currentTime = Date.now();
-        if (currentTime < lightsOffTime) {
-            message.textContent = 'Disqualified!';
-        } else {
-            const timeTaken = ((currentTime - lightsOffTime) / 1000).toFixed(2);
-            message.textContent = `You took ${timeTaken} seconds to press the button!`;
-        }
-        gameStarted = false;
-    });
-
-    // Start the game when the page loads
-    turnOffLights();
+    // Fetch the IP address when the page loads
+    fetchIP();
 });
