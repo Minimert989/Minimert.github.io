@@ -1,42 +1,50 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const lights = Array.from(document.querySelectorAll('.light'));
-    const button = document.getElementById('steeringWheel');
-    const message = document.getElementById('message');
+    const messagesContainer = document.getElementById('messages');
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendButton');
 
-    let lightsOffTime;
-    let gameStarted = false;
-
-    function randomTime(min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    function turnOffLights() {
-        const delay = randomTime(1000, 5000);
-        lightsOffTime = Date.now() + delay;
-        gameStarted = true;
-        lights.forEach((light, index) => {
-            setTimeout(() => {
-                light.style.backgroundColor = '#000'; // Light goes off
-            }, randomTime(0, delay));
-        });
-    }
-
-    button.addEventListener('click', function() {
-        if (!gameStarted) {
-            message.textContent = 'Please wait for the lights to turn off!';
-            return;
-        }
-
-        const currentTime = Date.now();
-        if (currentTime < lightsOffTime) {
-            message.textContent = 'Disqualified!';
+    // Function to create a new message element
+    function createMessageElement(text, isUserMessage) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message');
+        if (isUserMessage) {
+            messageElement.classList.add('user');
         } else {
-            const timeTaken = ((currentTime - lightsOffTime) / 1000).toFixed(2);
-            message.textContent = `You took ${timeTaken} seconds to press the button!`;
+            messageElement.classList.add('other');
         }
-        gameStarted = false;
-    });
+        messageElement.innerHTML = `<div class="text">${text}</div>`;
+        return messageElement;
+    }
 
-    // Start the game when the page loads
-    turnOffLights();
+    // Function to handle sending a message
+    function sendMessage() {
+        const messageText = messageInput.value.trim();
+        if (messageText) {
+            // Create and add the user message
+            const userMessage = createMessageElement(messageText, true);
+            messagesContainer.appendChild(userMessage);
+
+            // Clear the input field
+            messageInput.value = '';
+
+            // Simulate receiving a response (for demonstration purposes)
+            setTimeout(() => {
+                const responseMessage = createMessageElement('Received: ' + messageText, false);
+                messagesContainer.appendChild(responseMessage);
+
+                // Scroll to the bottom of the messages container
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            }, 1000);
+        }
+    }
+
+    // Add event listener to the send button
+    sendButton.addEventListener('click', sendMessage);
+
+    // Allow pressing Enter to send the message
+    messageInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            sendMessage();
+        }
+    });
 });
