@@ -2,7 +2,6 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    color: #333;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -17,55 +16,25 @@ header {
 
 /* Main content styles */
 main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px); /* Adjust height to fit the screen */
     padding: 20px;
 }
 
-/* Lights container */
-.lights-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+/* Container styles */
+.container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Light styles */
-.light {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: 10px;
-    background-color: #ccc;
-    border: 2px solid #333;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Steering wheel button styles */
-.steering-wheel {
-    width: 100px;
-    height: 100px;
-    background-color: #000;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-    margin: 0 auto;
-    background-image: url('steering-wheel.png'); /* Add your steering wheel image URL here */
-    background-size: cover;
-    background-position: center;
-}
-
-/* Message styles */
-#message {
-    margin-top: 20px;
-    font-size: 18px;
+/* IP address display styles */
+#ipAddress {
+    font-size: 24px;
     font-weight: bold;
-}
-
-/* Footer styles */
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+    color: #007bff;
 }
