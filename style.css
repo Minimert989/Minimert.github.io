@@ -1,71 +1,97 @@
-/* General body styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    color: #333;
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
-/* Header styles */
 header {
     background-color: #333;
     color: #fff;
     padding: 20px 0;
 }
 
-/* Main content styles */
 main {
+    display: flex;
+    justify-content: center;
     padding: 20px;
 }
 
-/* Lights container */
-.lights-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-}
-
-/* Light styles */
-.light {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: 10px;
-    background-color: #ccc;
-    border: 2px solid #333;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Steering wheel button styles */
-.steering-wheel {
-    width: 100px;
-    height: 100px;
-    background-color: #000;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-    margin: 0 auto;
-    background-image: url('steering-wheel.png'); /* Add your steering wheel image URL here */
-    background-size: cover;
-    background-position: center;
-}
-
-/* Message styles */
-#message {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Footer styles */
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    position: fixed;
+.chat-container {
     width: 100%;
-    bottom: 0;
+    max-width: 600px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+}
+
+.messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    border-bottom: 1px solid #ddd;
+}
+
+.message {
+    margin-bottom: 10px;
+}
+
+.message img {
+    max-width: 200px;
+    border-radius: 5px;
+}
+
+.message.user {
+    text-align: right;
+}
+
+.message.user .text {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.message.other .text {
+    background-color: #e9ecef;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.input-container {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+
+#fileInput {
+    margin-right: 10px;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#sendButton {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#sendButton:hover {
+    background-color: #0056b3;
 }
