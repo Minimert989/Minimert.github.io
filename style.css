@@ -1,71 +1,84 @@
-/* General body styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+.row
+{
+    background: #fff;
 }
-
-/* Header styles */
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 20px 0;
+img.logo-img {
+    vertical-align: middle;
+    width: 2rem;
+    margin-left: 4rem;
+    margin-top: 24px;
 }
-
-/* Main content styles */
-main {
-    padding: 20px;
+.navbar-light .navbar-nav .nav-link {
+    color: rgb(10 10 10);
+    font-family: Calibre, Helvetica Neue, Segoe UI, Helvetica, Arial, Lucida Grande, sans-serif;
+    font-size: 12px;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 750;
+    line-height: 30px;
+    margin: 0 15px;
+    margin-top: 0px;
+    margin-right: 15px;
+    margin-bottom: 0px;
+    margin-left: 15px;
+    transition: opacity .2s ease-in;
+    
 }
-
-/* Lights container */
-.lights-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: -0.5rem;
+    padding-left: -0.5rem;
 }
-
-/* Light styles */
-.light {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    margin: 10px;
-    background-color: #ccc;
-    border: 2px solid #333;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-/* Steering wheel button styles */
-.steering-wheel {
-    width: 100px;
-    height: 100px;
-    background-color: #000;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    cursor: pointer;
+.navbar li
+{
     position: relative;
-    margin: 0 auto;
-    background-image: url('steering-wheel.png'); /* Add your steering wheel image URL here */
-    background-size: cover;
-    background-position: center;
+    
 }
-
-/* Message styles */
-#message {
-    margin-top: 20px;
-    font-size: 18px;
-    font-weight: bold;
+.navbar li:hover
+{
+text-decoration: underline;
+color: rgb(61, 61, 206);
 }
-
-/* Footer styles */
-footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
+h1.main-font
+{
+	background:  linear-gradient(81.84deg, #0099ff -9.4%, #a033ff 51.57%, #ff5280 84.07%, #ff7061 90.59%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+    font-size: 59px;
+    font-weight: 500;
+}
+.paragraph
+{
+    text-align: left;
+    color:  #595959;;
+}
+.form-control {
+    display: block;
+    width: 50%;
+    padding: .375rem .75rem;
+    font-size: 13px;
+    font-weight: 200;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 1);
+    background-color: rgba(0, 0, 0, .04);
+    background-clip: padding-box;
+    border: none;
+    border-radius: 10px;
+    font-family: Calibre, Helvetica Neue, Segoe UI, Helvetica, Arial, Lucida Grande, sans-serif;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+a {
+    color: #0d6efd;
+    text-decoration: underline;
+    font-size: 11px;
+    margin-top: 15px;
+}
+label {
+    display: inline-block;
+    font-size: small;
+   
+}
+img.footertag {
+    margin-top: 24px;
+    width: 8rem;
 }
