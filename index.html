@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Community Website</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-        h1 { color: #333; }
-    </style>
+    <title>F1 Lights Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to My Community Website!</h1>
-    <p>This is where your community can interact and share ideas.</p>
+    <header>
+        <h1>F1 Lights Game</h1>
+    </header>
+    <main>
+        <div class="lights-container">
+            <div class="light" id="light1"></div>
+            <div class="light" id="light2"></div>
+            <div class="light" id="light3"></div>
+            <div class="light" id="light4"></div>
+            <div class="light" id="light5"></div>
+        </div>
+        <button id="steeringWheel" class="steering-wheel"></button>
+        <div id="message"></div>
+    </main>
+    <footer>
+        <p>&copy; 2024 F1 Lights Game</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
