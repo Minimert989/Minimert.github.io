@@ -1,9 +1,25 @@
-<script>
-    fetch('https://your-backend-service.up.railway.app/log-ip', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ visitTime: new Date().toISOString() })
-    });
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Logger Example</title>
+</head>
+<body>
+    <h1>Welcome to My Website!</h1>
+    <p>This website logs visitor IPs for analytics purposes.</p>
+
+    <script>
+        // Replace the URL below with your Railway backend URL
+        fetch('https://your-backend-name.up.railway.app/log-ip', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ visitTime: new Date().toISOString() })
+        }).catch(err => {
+            console.error('Failed to log IP:', err);
+        });
+    </script>
+</body>
+</html>
