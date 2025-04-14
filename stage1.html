@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>404 Not Found</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #ccc;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    h1 {
+      font-size: 48px;
+      color: #ff5555;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    input {
+      opacity: 0;
+      position: absolute;
+      top: -1000px;
+    }
+  </style>
+</head>
+<body>
+  <h1>404 Not Found</h1>
+  <p>The page you are looking for does not exist.</p>
+
+  <!-- 비밀 입력창 -->
+  <input id="secret" type="text" autocomplete="off" />
+
+  <script>
+    const input = document.getElementById("secret");
+
+    // 키보드 입력 감지 → 입력창 포커스
+    document.addEventListener("keydown", () => {
+      input.focus();
+    });
+
+    // 정답 확인
+    input.addEventListener("input", (e) => {
+      if (e.target.value.trim().toLowerCase() === "escape") {
+        window.location.href = "stage2.html";
+      }
+    });
+
+    // 힌트 로그
+    console.log("<!-- Maybe it's time to escape... -->");
+  </script>
+</body>
+</html>
