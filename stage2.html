@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Access Denied</title>
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #35ff8a;
+      font-family: monospace;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .box {
+      border: 2px solid #35ff8a;
+      padding: 30px;
+      width: 600px;
+      max-width: 90%;
+      background-color: #111;
+      box-shadow: 0 0 20px #35ff8a33;
+    }
+
+    .button {
+      background: #111;
+      border: 1px solid #35ff8a;
+      color: #35ff8a;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #fake-result {
+      margin-top: 20px;
+      color: red;
+      display: none;
+    }
+
+    #real-input {
+      position: absolute;
+      top: -1000px;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h1>ACCESS DENIED</h1>
+    <p>Unauthorized interaction blocked</p>
+    <button class="button" id="fake-button">UNLOCK</button>
+    <p id="fake-result">Error: Invalid attempt</p>
+  </div>
+
+  <input type="text" id="real-input" />
+
+  <script>
+    // 가짜 버튼: 누르면 에러 메시지 표시
+    document.getElementById('fake-button').addEventListener('click', () => {
+      document.getElementById('fake-result').style.display = 'block';
+    });
+
+    // 눈에 보이지 않는 엉뚱한 요소에 진짜 리스너
+    const ghost = document.createElement('div');
+    ghost.id = "ghost";
+    ghost.style.width = "1px";
+    ghost.style.height = "1px";
+    ghost.style.position = "absolute";
+    ghost.style.left = "0";
+    ghost.style.top = "0";
+    ghost.style.opacity = "0";
+    document.body.appendChild(ghost);
+
+    ghost.addEventListener('click', () => {
+      document.getElementById('real-input').focus();
+    });
+
+    // 정답 입력 감지
+    document.getElementById('real-input').addEventListener('input', (e) => {
+      if (e.target.value.trim().toLowerCase() === 'unlock') {
+        window.location.href = 'stage3.html';
+      }
+    });
+
+    // 콘솔 힌트
+    const encoded = 'dW5sb2Nr'; // base64 for "unlock"
+    console.log('Hint:', atob(encoded));
+  </script>
+</body>
+</html>
