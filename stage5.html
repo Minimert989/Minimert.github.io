@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stage 5</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+    }
+    canvas {
+      display: block;
+      margin: auto;
+      background-color: #111;
+      cursor: crosshair;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="maze" width="400" height="400"></canvas>
+
+  <script>
+    const canvas = document.getElementById("maze");
+    const ctx = canvas.getContext("2d");
+
+    // 간단한 미로
+    ctx.fillStyle = "#0f0";
+    ctx.fillRect(20, 20, 360, 360); // 전체 통로
+    ctx.clearRect(60, 60, 280, 280); // 막힌 공간 (장식용)
+
+    ctx.fillStyle = "#111"; // 벽
+    ctx.fillRect(100, 0, 20, 300);
+    ctx.fillRect(200, 100, 20, 300);
+    ctx.fillRect(300, 0, 20, 300);
+
+    ctx.fillStyle = "#f00";
+    ctx.fillRect(370, 370, 20, 20); // 목표지점
+
+    canvas.addEventListener("click", (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // 클릭이 목표 영역이면 통과
+      if (x > 370 && x < 390 && y > 370 && y < 390) {
+        window.location.href = "stage6.html";
+      } else {
+        alert("Incorrect location.");
+      }
+    });
+
+    console.log("Hint: Reach bottom-right (370,370)");
+  </script>
+</body>
+</html>
