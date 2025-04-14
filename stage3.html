@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stage 3</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+    #shell {
+      border: 1px solid #444;
+      padding: 40px;
+      background-color: #111;
+      box-shadow: 0 0 10px #0f0;
+    }
+  </style>
+</head>
+<body>
+  <div id="shell">
+    <h1>Terminal Locked</h1>
+    <p>Awaiting system override...</p>
+  </div>
+
+  <script>
+    // Shadow DOM 트랩 (closed mode)
+    const shadowHost = document.createElement('div');
+    document.body.appendChild(shadowHost);
+
+    const shadow = shadowHost.attachShadow({ mode: 'closed' });
+    const secretInput = document.createElement('input');
+    secretInput.type = 'text';
+    secretInput.id = 'hidden';
+    secretInput.placeholder = 'Command';
+    secretInput.style.opacity = '0';
+    shadow.appendChild(secretInput);
+
+    // 포커스 유도
+    document.addEventListener('keydown', () => {
+      secretInput.focus();
+    });
+
+    secretInput.addEventListener('input', (e) => {
+      if (e.target.value.trim().toLowerCase() === 'unseal') {
+        window.location.href = 'stage4.html';
+      }
+    });
+
+    console.log("Hint: atob('dW5zZWFs') → ?");
+  </script>
+</body>
+</html>
