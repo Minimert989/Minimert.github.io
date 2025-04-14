@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stage 6</title>
+  <style>
+    body {
+      background-color: black;
+      color: #0f0;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+    #msg {
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div id="msg">
+    <h1>System Input Offline</h1>
+    <p>Manual override required via data injection.</p>
+    <p><em>(Try pasting something...)</em></p>
+  </div>
+
+  <script>
+    document.addEventListener("paste", (e) => {
+      const data = (e.clipboardData || window.clipboardData).getData("text");
+      if (data.trim().toLowerCase() === "freedom") {
+        window.location.href = "stage7.html";
+      } else {
+        alert("Injection failed.");
+      }
+    });
+
+    console.log("Hint: Paste 'freedom' to continue");
+  </script>
+</body>
+</html>
