@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>NEIS+ 학교생활기록부 → JSON 변환기</title>
+<style>
+  :root{--bg:#f6f7fb;--panel:#fff;--ink:#172033;--muted:#667085;--line:#e4e7ec;--accent:#2457d6;--accent2:#1b46b0;--danger:#b42318;--ok:#067647;--code:#101828}
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",sans-serif}
+  .wrap{max-width:1180px;margin:0 auto;padding:32px 20px 56px}.head{display:flex;gap:20px;align-items:flex-end;justify-content:space-between;margin-bottom:20px}
+  h1{font-size:28px;margin:0 0 8px}.sub{margin:0;color:var(--muted);line-height:1.6}.badge{font-size:12px;color:var(--ok);border:1px solid #abefc6;background:#ecfdf3;padding:7px 10px;border-radius:999px;white-space:nowrap}
+  .grid{display:grid;grid-template-columns:360px 1fr;gap:18px}.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 1px 2px rgba(16,24,40,.03)}
+  h2{font-size:16px;margin:0 0 14px}.drop{border:1.5px dashed #98a2b3;border-radius:12px;padding:20px;text-align:center;background:#fcfcfd}.drop.drag{border-color:var(--accent);background:#f2f6ff}
+  input[type=file]{width:100%;margin-top:12px}.opts{display:grid;gap:10px;margin-top:16px}.opt{display:flex;align-items:flex-start;gap:9px;font-size:13px;line-height:1.45;color:#344054}.opt input{margin-top:2px}
+  button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:10px 13px;font-weight:700;cursor:pointer}button:hover{background:#f9fafb}.primary{width:100%;margin-top:16px;background:var(--accent);border-color:var(--accent);color:#fff}.primary:hover{background:var(--accent2)}
+  .actions{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}.status{font-size:13px;line-height:1.55;color:var(--muted);min-height:42px}.status.ok{color:var(--ok)}.status.err{color:var(--danger)}
+  textarea{width:100%;min-height:660px;resize:vertical;border:1px solid var(--line);border-radius:12px;padding:14px;background:#0b1220;color:#d7e0ef;font:12.5px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;tab-size:2}
+  .schema{margin-top:18px}.schema pre{white-space:pre-wrap;word-break:break-word;background:#f8fafc;border:1px solid var(--line);border-radius:12px;padding:14px;font:12px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;max-height:360px;overflow:auto}
+  .diag{font-size:12px;color:var(--muted);line-height:1.6;margin-top:10px}.mini{font-size:12px;color:var(--muted)}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.hidden{display:none}
+  @media(max-width:880px){.grid{grid-template-columns:1fr}.head{align-items:flex-start;flex-direction:column}.badge{white-space:normal}textarea{min-height:520px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="head">
+    <div><h1>NEIS+ 학교생활기록부 → JSON</h1><p class="sub">저장한 나이스+ HTML을 브라우저 내부에서만 읽어 정규화합니다. 성명·주민등록번호·주소·학반/번호·담임·사진 등 직접식별 정보는 결과에서 제외합니다.</p></div>
+    <div class="badge">로컬 처리 · 외부 전송 없음</div>
+  </div>
+  <div class="grid">
+    <section class="card">
+      <h2>1. 원본 HTML 선택</h2>
+      <div class="drop" id="dropZone">
+        <div><strong>NEIS+에서 저장한 .html 파일</strong></div>
+        <div class="mini">파일을 끌어놓거나 아래에서 선택</div>
+        <input id="fileInput" type="file" accept=".html,.htm,text/html" />
+      </div>
+      <div class="opts">
+        <label class="opt"><input id="includeRaw" type="checkbox" checked /> <span><b>비식별 원본 표 백업 포함</b><br>정규화에 실패한 새 양식도 <code>audit.raw_non_personal_tables</code>에 보존</span></label>
+        <label class="opt"><input id="strictInstitution" type="checkbox" /> <span><b>기관명도 익명화</b><br>학교명·수여기관·봉사 주관기관을 <code>[기관]</code>으로 치환. 기본은 OFF.</span></label>
+        <label class="opt"><input id="omitEmpty" type="checkbox" /> <span><b>내용 없는 학년 행 생략</b><br>ON이면 독서활동 등에서 학년만 있고 내용이 없는 행을 생략</span></label>
+      </div>
+      <button class="primary" id="convertBtn">JSON 변환</button>
+      <div id="status" class="status">파일을 선택하면 변환할 수 있습니다.</div>
+      <div id="diag" class="diag"></div>
+      <div class="schema">
+        <h2>권장 구조</h2>
+        <pre id="schemaPreview"></pre>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="actions">
+        <button id="copyBtn">JSON 복사</button>
+        <button id="downloadBtn">JSON 다운로드</button>
+        <button id="schemaBtn">빈 스키마 보기</button>
+      </div>
+      <textarea id="output" spellcheck="false" placeholder="변환 결과가 여기에 표시됩니다."></textarea>
+    </section>
+  </div>
+</div>
+<script src="part1.js"></script>
+<script src="part2.js"></script>
+<script src="part3.js"></script>
+<script src="part4.js"></script>
+</body>
+</html>
