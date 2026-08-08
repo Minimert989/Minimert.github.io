@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f6f7fb"/>
+  <rect x="72" y="72" width="1056" height="486" rx="36" fill="#ffffff" stroke="#e4e7ec" stroke-width="3"/>
+  <rect x="110" y="112" width="118" height="46" rx="23" fill="#ecfdf3" stroke="#abefc6"/>
+  <text x="169" y="143" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="700" fill="#067647">LOCAL</text>
+  <text x="110" y="268" font-family="Arial, sans-serif" font-size="64" font-weight="800" fill="#172033">NEIS+ → JSON</text>
+  <text x="110" y="340" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#2457d6">학교생활기록부 비식별 변환기</text>
+  <text x="110" y="414" font-family="Arial, sans-serif" font-size="25" fill="#667085">Saved HTML · Local parsing · No server upload</text>
+  <text x="110" y="475" font-family="Arial, sans-serif" font-size="22" fill="#667085">neis-json-converter.vercel.app</text>
+</svg>
